@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <title>SVHN Model as a Flask API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<h1>Bias Sentence Predictor</h1>
+<div class="agile-its">
+    <h2>Bias Sentence Predictor Web Service</h2>
+    <div class="w3layouts">
+        <div class="text-upload-view">
+            <form id="upload" action="/predict" method="POST" enctype="multipart/form-data">
+                <div class="upload-btn-wrapper">
+                    <input type="text" name="input_text">
+                </div>
+                <input type="submit" value="예측 결과">
+                {% if label %}
+                    <span class="result_lable">
+                        {{ label }}
+                    </span>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+pandas
+sentencepiece
+tensorflow
+Flask
+Jinja2
+numpy
+scikit-learn
+scipy
+virtualenv
+pillow
