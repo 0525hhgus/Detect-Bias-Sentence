@@ -79,9 +79,10 @@ h2{
   font-weight: bold;
 }
 
-.upload-btn-wrapper input[type=file] {
+.upload-btn-wrapper input[type="text"] {
   font-size: 100px;
   position: absolute;
+  width: 100%;
   left: 0;
   top: 0;
   opacity: 0;

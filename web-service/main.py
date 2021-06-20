@@ -80,7 +80,7 @@ def data_preprocessing(train, test):
 
     return x_train, y_train, x_test, y_test
 
-def evalution(x_test, y_test, model):
+def evalution(x_test, model):
 
     # data_pre = model.predict(x_test)
     # print(data_pre)
@@ -91,18 +91,7 @@ def evalution(x_test, y_test, model):
 
     pred_z = np.asarray(pred_z).astype('float32')
 
-    y_test_z = y_test
-    # y_test_z[y_test_z == i] = -1
-    # y_test_z[y_test_z >= 0] = 0
-    # y_test_z[y_test_z < 0] = 1
-
-    # print(pred_z)
-    # print(y_test)
-
-    # test_loss, test_acc = model.evaluate(x_test, y_test)
-
-    # print("Test accuracy", test_acc)
-    # print("Test loss", test_loss)
+    return pred_z
 
 # 데이터 예측 처리
 @app.route('/predict', methods=['POST'])
@@ -115,8 +104,8 @@ def make_prediction():
             return render_template('index.html', label="No Text")
 
         line_input = []
-        line_input.append(x_test)
-        lines = pd.DataFrame({"comments": list(line_input), "label": [0]})
+        line_input.append(str(x_test))
+        lines = pd.DataFrame({"comments": line_input, "label": [0]})
         line_test = lines.copy()
 
         _, _, line_x, _ = data_preprocessing(line_test, lines)
@@ -124,16 +113,15 @@ def make_prediction():
         line_x = keras.preprocessing.sequence.pad_sequences(line_x, maxlen=maxlen)
 
         # 입력 받은 텍스트 예측
-        pred = model.predict(line_x)
-
-        label = pred.index(max(pred))
+        label = evalution(line_x, model)
 
         # 숫자가 10일 경우 0으로 처리
-        if label == '0': label = 'false'
-        elif label == '1': label = 'true'
+        if label[0] == 0: out_label = 'Good'
+        elif label[0] == 1: out_label = 'Bias'
+        print(out_label)
 
         # 결과 리턴
-        return render_template('index.html', label=label)
+        return render_template('index.html', label=out_label)
 
 
 def make_model(maxlen, vocab_size):
@@ -157,8 +145,9 @@ def make_model(maxlen, vocab_size):
 if __name__ == '__main__':
     # 모델 로드
     # ml/model.py 선 실행 후 생성
+
     model = make_model(maxlen, vocab_size)
-    model.load_weights('./model/model.pkl')
+    model.load_weights('./model/checkpoints_model_trans3.ckpt')
     model.compile(
         optimizer="adam",
         loss="sparse_categorical_crossentropy",
