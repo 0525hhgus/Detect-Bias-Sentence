@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>SVHN Model as a Flask API</title>
+    <title>BSP Model as a Flask API</title>
     <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,11 +10,12 @@
 <body>
 <h1>Bias Sentence Predictor</h1>
 <div class="agile-its">
-    <h2>Bias Sentence Predictor Web Service</h2>
+    <h2>Flask with DL Web Service</h2>
     <div class="w3layouts">
-        <div class="text-upload-view">
+        <div class="upload-view">
+
             <form id="upload" action="/predict" method="POST" enctype="multipart/form-data">
-                <div class="upload-btn-wrapper">
+                <div class="wrapper">
                     <input type="text" name="input_text">
                 </div>
                 <input type="submit" value="예측 결과">

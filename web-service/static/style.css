@@ -69,6 +69,7 @@ h2{
   left: 130px;
 }
 
+
 .btn {
   border: 2px solid gray;
   color: gray;
@@ -79,14 +80,19 @@ h2{
   font-weight: bold;
 }
 
-.upload-btn-wrapper input[type="text"] {
+.input[type="text"] {
+    width: 100%;
+}
+
+
+.wrapper input[type="text"] {
   font-size: 100px;
   position: absolute;
-  width: 100%;
   left: 0;
   top: 0;
   opacity: 0;
 }
+
 h3{
 	text-align:center;
 	margin-top:10px;
@@ -106,4 +112,5 @@ input[type="submit"]{
 	font-size:14px;
 	cursor:pointer;
 	margin-left:23%;
+    margin-top:10px;
 }
